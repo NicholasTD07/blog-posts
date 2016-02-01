@@ -2,6 +2,11 @@
 title: Use Protocol in Swift as Function Parameter - TL;DR
 created_at: 2015-06-07 21:15:01
 kind: article
+
+tags:
+  - Swift
+  - Swift 1.2
+
 permalink: "/tldr/2015/06/08/use-protocol-in-swift-as-function-parameter.html"
 ---
 

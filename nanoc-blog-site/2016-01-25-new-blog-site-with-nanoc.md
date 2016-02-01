@@ -3,6 +3,9 @@ title: "New Blog Site With Nanoc"
 created_at: 2016-01-25 15:12:04 +0800
 kind: article
 
+tags:
+  - Nanoc Blog Site
+
 link_to_commits: true
 github_username: NicholasTD07
 repo: nanoc-blog-site

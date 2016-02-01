@@ -1,7 +1,12 @@
 ---
-title:  "How to Extend Argo with Custom Type Parser - TL;DR"
-created_at:   2015-06-06 20:00:00
+title: "How to Extend Argo with Custom Type Parser - TL;DR"
+created_at: 2015-06-06 20:00:00
 kind: article
+
+tags:
+  - Swift
+  - Swift 1.2
+
 permalink: "/tldr/2015/06/07/tldr-how-to-extend-argo-with-custom-type-parser.html"
 ---
 
