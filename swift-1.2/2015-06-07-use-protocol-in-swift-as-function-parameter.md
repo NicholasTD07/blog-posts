@@ -91,6 +91,4 @@ Even more complicated if you want `changeName` function to work with both class 
 
 * All parameter themselves need to be a **var**. NO **let**.
 
-
-<!-- TODO -->
-{% gist NicholasTD07/1ac49c97a8704cc44dba %}
+<script src="https://gist.github.com/NicholasTD07/1ac49c97a8704cc44dba.js"></script>

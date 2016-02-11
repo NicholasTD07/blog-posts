@@ -21,6 +21,4 @@ It shows how to extend [Argo](https://github.com/thoughtbot/Argo)'s ability to p
 
 If you want to play with the following code, you can copy and paste it into [Argo](https://github.com/thoughtbot/Argo)'s playground.
 
-<!-- TODO -->
-{% gist NicholasTD07/67fb7a96b93d6ca828bf %}
-
+<script src="https://gist.github.com/NicholasTD07/67fb7a96b93d6ca828bf.js"></script>
