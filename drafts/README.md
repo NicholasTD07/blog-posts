@@ -9,7 +9,7 @@ It's a place for
 
 ## Workflow
 
-* New drafts in its own branches `draft/this-is-a-test`
+* New drafts in its own branches `draft/topic/this-is-a-test`
 * After done, move it out to some other folder
   `swift/how-to-make-xcode-compile-faster`
 * Create a PR
