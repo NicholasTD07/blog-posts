@@ -47,7 +47,6 @@ Drafts are in other branches (`not master`)
   - Latex
   - My understanding of the standards involved in latex
   - Sydney's Latex Matress Comparison
-  - 
   
 ## Random Idea Collector
 
