@@ -31,7 +31,6 @@ Drafts are in other branches (`not master`)
   - [`carthage-bootstrap-wat`](https://github.com/NicholasTD07/dotfiles/blob/master/bin/bootstrap-wat)
   - [`git-checkout-history`](https://github.com/NicholasTD07/dotfiles/blob/master/bin/checkout-history)
   - [`remove-merged-branches`](https://github.com/NicholasTD07/dotfiles/blob/master/bin/remove-merged-branches.py)
-  - TODO: Autogen for public init method for Swift structs/classes
 
 - Shell
   - Playing with Antigen to set up Zsh
