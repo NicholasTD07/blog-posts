@@ -34,6 +34,7 @@ Five types (of things) composes Redux:
 **More Reading:**
 
 [Redux Doc: Motivation](http://redux.js.org/docs/introduction/Motivation.html)
+
 [The Case for Flux](https://medium.com/swlh/the-case-for-flux-379b7d1982c6#.ddab5kuhi)
 
 ## Redux in Swift
