@@ -243,6 +243,10 @@ counterStore.dispatch(Increase())
 assert(counter == counterStore.state)
 ```
 
+## Recap
+
+TODO!
+
 ## Ref
 
 [Getting Started with Redux (30 free videos, 2 minutes each)](https://egghead.io/series/getting-started-with-redux)
