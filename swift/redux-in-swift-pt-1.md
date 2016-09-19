@@ -39,9 +39,9 @@ Five types (of things) composes Redux:
 
 ## Redux in Swift
 
+I will write the minimium implementation of a Redux architecture bit by bit, to get the snippet to compile while satisfying the requirements, with detailed explanations.
 
-
-## 70 Lines EXAMPLE! Bit by Bit!
+## 70 Lines EXAMPLE!
 
 [Full version here](https://github.com/NicholasTD07/TTTTT/blob/master/swift-experiments/redux-with-generic-class.swift)
 
@@ -53,7 +53,6 @@ As mentioned above, we need five types (of things) to compose/implement Redux, w
 - Reducer
 - Subscriber
 
-I will write the minimium implementation to get the snippet to compile while satisfying the requirements of what makes Redux.
 
 Let's get the party started!
 
