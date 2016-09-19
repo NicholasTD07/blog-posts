@@ -110,7 +110,7 @@ Because you cannot add `case`s outside of `Enum` , otherwise, if you do `extend 
     - This is partially why we need that `!` when defining the `state` in the `Store`
 - It should return the current *State* if it is given an *Action* it cannot handle
 
-### Dispatching Actions and Subscribers
+### Dispatching Actions and Notifying Subscribers
 
 An *Action* can be dispatched to a *Store* to change its *State*. After a *Store*'s *State* is changed, the *Store* should notify all of its *Subscribers*.
 
@@ -126,6 +126,67 @@ class Store<State> {
             $0(store: self)
         }
     }
+}
+```
+
+Now the generic class `Store` is almost usable except a few pieces missing. Example usage:
+
+```swift
+struct Increase: ActionType { }
+
+let counterStore = Store<Int>.init { (state: Int?, action: ActionType) -> Int in /* ... */ }
+
+counterStore.dispatch(Increase())
+```
+
+#### How does a Store Get its Initial State?
+
+We need to update the `init` method in `Store` to the following:
+
+```swift
+class Store<State> {
+    // ... previous code ...
+    init(with reducer: Reducer) {
+        self.reducer = reducer
+
+        dispatch(InitialAction())
+    }
+}
+```
+
+and also add the definition of the `InitialAction` (outside the definition of the `Store`),
+
+```swift
+struct InitialAction: ActionType { }
+```
+
+So when a *Store* initializes, the following would happen:
+
+- the `Store` will call its `dispatch` with the `InitialAction`
+- `dispatch` would update the `Store`'s `state` by calling its `reducer` with `nil` as the `State` and `InitialAction`
+- the `state` in the `Store` would be set to whatever `Reducer` returns as the initial state
+    - since `Reducer` returns the actual initial state when it receives a `nil` as the `state` param
+
+### Subscribing to a Store
+
+*Subscriber*s are functions which takes a *Store* as its only param and they can subscribe to *Store*s by calling the following method.
+
+```swift
+class Store<State> {
+    // ... previous code ...
+    final func subscribe(with subscriber: Subscriber) {
+        subscribers.append(subscriber)
+        subscriber(store: self)
+    }
+}
+```
+
+With the `Store.subscribe` defined and the previous example snippet, you can do things like this: 
+
+```swift
+var counter: Int = -1000
+counterStore.subscribe { (store: Store<Int>) in
+    counter = store.state
 }
 ```
 
