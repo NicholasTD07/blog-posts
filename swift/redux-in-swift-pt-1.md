@@ -203,7 +203,7 @@ If you remove all the example snipet and add the following snippet and run the f
 - in Xcode Playground or,
 - in commond line by running `swift path/to/your-file`,
 
-the file should run without any problem.
+the file should run without any problem which indicates all the assert (tests) passes.
 
 ```swift
 struct Increase: ActionType { }
