@@ -156,7 +156,7 @@ class Store<State> {
 }
 ```
 
-and also add the definition of the `InitialAction` (outside the definition of the `Store`),
+and also add the definition of the `InitialAction` (before and outside the definition of the `Store`),
 
 ```swift
 struct InitialAction: ActionType { }
