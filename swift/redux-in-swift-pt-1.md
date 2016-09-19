@@ -1,12 +1,6 @@
 # Redux in Swift Part 1: Introduction and Example within 70 lines!
 
 
-
-## TODO
-
-- Ask Swifty people for proof-reading
-
-
 ![](https://www.dropbox.com/s/51evjhxw35t59x2/Redux.png?raw=1)
 
 
