@@ -4,7 +4,6 @@
 
 ## TODO
 
-- Explain the example in sections
 - Ask Swifty people for proof-reading
 
 
