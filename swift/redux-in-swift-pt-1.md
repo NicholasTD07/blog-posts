@@ -243,7 +243,7 @@ counterStore.dispatch(Increase())
 assert(counter == counterStore.state)
 ```
 
-## Recap
+## Summary / Recap / Conclusion
 
 TODO!
 
