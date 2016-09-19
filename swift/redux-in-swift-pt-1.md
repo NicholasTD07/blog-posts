@@ -3,7 +3,9 @@
 
 ## Redux 
 
-Uni-direction data-flow
+> Redux architecture revolves around a **strict unidirectional data flow**.
+
+
 
 ### WAT?
 
