@@ -1,4 +1,4 @@
-# Redux in Swift Part 1: Introduction and Example within 100 lines!
+# Redux in Swift Part 1: Introduction and Example within 70 lines!
 
 
 ## Redux 
@@ -14,16 +14,17 @@ In essense, it's an idea which trys to
 
 ### What composes Redux?
 
-Four types (of things) composes Redux:
+Five types (of things) composes Redux:
 
-- Store, which holds the "State"
-- Action, which gets dispatched to change the "State"
-- Subscriber, which listens to changes in the "State"
-- Reducer, which update the "State" according to the current "State" and the dispatched action
+- *State*, which could be anything
+- *Store*, which holds a *State*
+- *Action*, which gets dispatched to change the *State* in a *Store*
+- *Reducer*, which combines the current *State* and the dispatched action and generates a new *State*
+- *Subscriber*, which listens to changes of the *State* in a *Store*
 
 ### Why go with Redux?
 
-> All data in an application follows the same lifecycle pattern, making the logic of your app more predictable and easier to understand
+> All data in an application follows the same lifecycle pattern, making the logic of your app more predictable and easier to understand.
 
 **More Reading:**
 
@@ -32,9 +33,12 @@ Four types (of things) composes Redux:
 
 ## Redux in Swift
 
-## 100 Lines EXAMPLE!
 
 
+## 70 Lines EXAMPLE!
+
+```swift
+```
 
 ## Ref
 
