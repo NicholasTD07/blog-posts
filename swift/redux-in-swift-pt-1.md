@@ -1,5 +1,9 @@
 # Redux in Swift Part 1: Introduction and Example within 70 lines!
 
+## TODO
+
+- Explain the example in sections
+- Ask Swifty people for proof-reading
 
 ## Redux 
 
