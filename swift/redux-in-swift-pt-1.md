@@ -162,7 +162,7 @@ and also add the definition of the `InitialAction` (outside the definition of th
 struct InitialAction: ActionType { }
 ```
 
-So when a *Store* initializes, the following would happen:
+So when a *Store* initializes, the following would happen regarding its `state`:
 
 - the `Store` will call its `dispatch` with the `InitialAction`
 - `dispatch` would update the `Store`'s `state` by calling its `reducer` with `nil` as the `state` param and `InitialAction` 
