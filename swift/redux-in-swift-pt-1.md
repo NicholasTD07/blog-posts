@@ -139,6 +139,8 @@ let counterStore = Store<Int>.init { (state: Int?, action: ActionType) -> Int in
 counterStore.dispatch(Increase())
 ```
 
+If you want to run above snippet with minimum change, replace the `/* ... */` with `return 0`.
+
 #### How does a Store Get its Initial State?
 
 We need to update the `init` method in `Store` to the following:
@@ -163,9 +165,13 @@ struct InitialAction: ActionType { }
 So when a *Store* initializes, the following would happen:
 
 - the `Store` will call its `dispatch` with the `InitialAction`
-- `dispatch` would update the `Store`'s `state` by calling its `reducer` with `nil` as the `State` and `InitialAction`
-- the `state` in the `Store` would be set to whatever `Reducer` returns as the initial state
-    - since `Reducer` returns the actual initial state when it receives a `nil` as the `state` param
+- `dispatch` would update the `Store`'s `state` by calling its `reducer` with `nil` as the `state` param and `InitialAction` 
+- the `state` in the `Store` would be set to whatever the `Reducer` returns as the initial state
+    - because a `Reducer` returns the actual initial state when it receives a `nil` as its `state` param
+
+#### The BANG`!`
+
+As you can see from the above and actually running the snippet, the forced unwrapped `state` in the `Store` will always be set to non nil values before it's used as a non nil value. It is not only safe but also convenient to use (no need for `guard let`s everywhere).
 
 ### Subscribing to a Store
 
@@ -189,6 +195,8 @@ counterStore.subscribe { (store: Store<Int>) in
     counter = store.state
 }
 ```
+
+#### 
 
 ### Full file template
 
