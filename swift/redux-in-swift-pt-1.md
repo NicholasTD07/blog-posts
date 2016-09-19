@@ -198,7 +198,12 @@ counterStore.subscribe { (store: Store<Int>) in
 
 #### TESTS!
 
-If you remove all the example snipet and add the following snippet and run the file either in Xcode Playground or in commond line by running `swift path/to/your-file`, the file should run without any problem.
+If you remove all the example snipet and add the following snippet and run the file either
+
+- in Xcode Playground or,
+- in commond line by running `swift path/to/your-file`,
+
+the file should run without any problem.
 
 ```swift
 struct Increase: ActionType { }
