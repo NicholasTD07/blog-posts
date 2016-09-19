@@ -39,6 +39,8 @@ Five types (of things) composes Redux:
 
 ## 70 Lines EXAMPLE!
 
+[GitHub Link](https://github.com/NicholasTD07/TTTTT/blob/master/swift-experiments/redux-with-generic-class.swift)
+
 ```swift
 protocol ActionType { }
 struct InitialAction: ActionType { }
