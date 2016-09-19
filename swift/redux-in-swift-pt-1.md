@@ -41,9 +41,43 @@ Five types (of things) composes Redux:
 
 
 
-## 70 Lines EXAMPLE!
+## 70 Lines EXAMPLE! Bit by Bit!
 
-[GitHub Link](https://github.com/NicholasTD07/TTTTT/blob/master/swift-experiments/redux-with-generic-class.swift)
+[Full version here](https://github.com/NicholasTD07/TTTTT/blob/master/swift-experiments/redux-with-generic-class.swift)
+
+As mentioned above, we need five types (of things) to compose/implement Redux, which are:
+
+- State
+- Store
+- Action
+- Reducer
+- Subscriber
+
+I will write the minimium implementation to get the snippet to compile while satisfying the requirements of what makes Redux.
+
+Let's get the party started!
+
+### Store and its State
+
+We know that the *Store* holds a *State* which could be anything, thus the simplest implementation would be:
+
+```swift
+class Store<State> {
+    var state: State
+}
+```
+
+### Reducer and Action
+
+We know that a *Store* need a *Reducer* to generate new *State* from current *State* and an Action, which means:
+
+- A *Store* need to hold onto a *Reducer*
+- A *Reducer* takes a *State*
+
+
+### Full file template
+
+TODO: REMOVE ME!
 
 ```swift
 protocol ActionType { }
