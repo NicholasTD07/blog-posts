@@ -68,7 +68,7 @@ class Store<State> {
 
 ### Reducer and Action
 
-A *Store* need a *Reducer* to generate new *State* from current *State* and an Action, which means:
+A *Store* need a *Reducer* to generate new *State*s from the current *State* and an Action, which means:
 
 - A *Store* need to hold onto a *Reducer*
 - A *Reducer*
@@ -95,7 +95,7 @@ class Store<State> {
 
 #### Why `ActionType` cannot be an `Enum`?
 
-Because you cannot add `case`s outside of `Enum` , otherwise, if you do `extend SomeEnum { case X }` you would get this compiler error: `enum 'case' is not allowed outside of an enum`.
+Because `case`s cannot be added outside of `Enum` , otherwise, if you do `extend SomeEnum { case X }` you would get this compiler error: `enum 'case' is not allowed outside of an enum`.
 
 #### Things to Note about Reducer Type
 
