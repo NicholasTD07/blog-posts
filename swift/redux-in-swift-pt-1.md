@@ -50,9 +50,9 @@ class Store<State> {
     typealias Reducer = (state: State?, action: Action) -> State
     typealias Subscriber = (store: Store) -> ()
 
-    var state: State!
-    var reducer: Reducer
-    var subscribers = [Subscriber]()
+    final let reducer: Reducer
+    final var state: State!
+    final var subscribers = [Subscriber]()
 
     final func dispatch(action: Action) {
         self.state = reducer(state: state, action: action)
