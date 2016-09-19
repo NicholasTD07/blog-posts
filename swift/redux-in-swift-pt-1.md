@@ -65,21 +65,69 @@ Let's get the party started!
 
 ### Store and its State
 
-We know that the *Store* holds a *State* which could be anything, thus the simplest implementation would be:
+A *Store* holds a *State* which could be anything, thus the simplest implementation would be:
 
 ```swift
 class Store<State> {
-    var state: State
+    var state: State! // This `!` will be explained
 }
 ```
 
 ### Reducer and Action
 
-We know that a *Store* need a *Reducer* to generate new *State* from current *State* and an Action, which means:
+A *Store* need a *Reducer* to generate new *State* from current *State* and an Action, which means:
 
 - A *Store* need to hold onto a *Reducer*
-- A *Reducer* takes a *State*
+- A *Reducer*
+    - takes a *State* and a *Action* and
+    - returns a new *State*
+- An *Action* is only needed to differentiate from each other
 
+Essentially, *Reducer* in Swift can be defined as a type.
+
+
+```swift
+protocol ActionType { }
+
+class Store<State> {
+    // ... previous code ...
+    typealias Reducer = (state: State?, action: ActionType) -> State
+    final let reducer: Reducer
+    
+    init(with reducer: Reducer) {
+        self.reducer = reducer
+    }
+}
+```
+
+#### Why `ActionType` cannot be an `Enum`?
+
+Because you cannot add `case`s outside of `Enum` , otherwise, if you do `extend SomeEnum { case X }` you would get this compiler error: `enum 'case' is not allowed outside of an enum`.
+
+#### Things to Note about Reducer Type
+
+- It takes `nil` as `State` which implies the default initial state is defined in a *Reducer* rather than *Store*
+    - This is partially why we need that `!` when defining the `state` in the `Store`
+- It should return the current *State* if it is given an *Action* it cannot handle
+
+### Dispatching Actions and Subscribers
+
+An *Action* can be dispatched to a *Store* to change its *State*. After a *Store*'s *State* is changed, the *Store* should notify all of its *Subscribers*.
+
+```swift
+class Store<State> {
+    // ... previous code ...
+    typealias Subscriber = (store: Store) -> ()
+    final var subscribers = [Subscriber]()
+
+    final func dispatch(action: ActionType) {
+        self.state = reducer(state: state, action: action)
+        subscribers.forEach {
+            $0(store: self)
+        }
+    }
+}
+```
 
 ### Full file template
 
