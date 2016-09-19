@@ -5,7 +5,7 @@
 
 > Redux architecture revolves around a **strict unidirectional data flow**.
 
-
+[Redux Doc: Data Flow](http://redux.js.org/docs/basics/DataFlow.html)
 
 ### WAT?
 
