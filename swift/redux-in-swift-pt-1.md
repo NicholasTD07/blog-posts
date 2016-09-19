@@ -196,44 +196,11 @@ counterStore.subscribe { (store: Store<Int>) in
 }
 ```
 
-#### 
+#### TESTS!
 
-### Full file template
-
-TODO: REMOVE ME!
+If you remove all the example snipet and add the following snippet and run the file either in Xcode Playground or in commond line by running `swift path/to/your-file`, the file should run without any problem.
 
 ```swift
-protocol ActionType { }
-struct InitialAction: ActionType { }
-
-class Store<State> {
-    typealias Action = ActionType
-    typealias Reducer = (state: State?, action: Action) -> State
-    typealias Subscriber = (store: Store) -> ()
-
-    final let reducer: Reducer
-    final var state: State!
-    final var subscribers = [Subscriber]()
-
-    final func dispatch(action: Action) {
-        self.state = reducer(state: state, action: action)
-        subscribers.forEach {
-            $0(store: self)
-        }
-    }
-
-    final func subscribe(with subscriber: Subscriber) {
-        subscribers.append(subscriber)
-        subscriber(store: self)
-    }
-
-    init(with reducer: Reducer) {
-        self.reducer = reducer
-
-        dispatch(InitialAction())
-    }
-}
-
 struct Increase: ActionType { }
 struct Decrease: ActionType { }
 
@@ -261,14 +228,19 @@ assert(counterStore.state == 0)
 counterStore.dispatch(Increase())
 assert(counterStore.state == 1)
 
-// dispatch Decrease will increase the state
+// dispatch Decrease will decrease the state
 counterStore.dispatch(Decrease())
 assert(counterStore.state == 0)
 
+// when subscribing, subscribers will get notified of the state
 var counter: Int = -1000
 counterStore.subscribe { (store: Store<Int>) in
     counter = store.state
 }
+assert(counter == counterStore.state)
+
+// when state is updated, subscirbers will get notified of the new state
+counterStore.dispatch(Increase())
 assert(counter == counterStore.state)
 ```
 
