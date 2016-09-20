@@ -265,8 +265,9 @@ assert(counter == counterStore.state)
 
 In the next blog, I will
 
-- explain how to split large *Reducer*s into smaller ones and combine them back into one using something new called *`combineReducers`*.
 - Build a Todo with Swift and the micro Redux framework we built in this blog post.
+- explain how to split large *Reducer*s into smaller ones and combine them back into one using something new called *`combineReducers`*.
+    - (TBH: I have no idea what it would be right now. I guess it would be a function like the *Reducers* in this blog)
 
 Stay tuned!
 
