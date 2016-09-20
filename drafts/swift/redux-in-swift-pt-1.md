@@ -1,6 +1,6 @@
 # Redux in Swift Part 1: Introduction and Example within 70 Lines!
 
-In this blog, I will introduce you to the concept of Redux architecture, implement and explain it in Swift bit by bit with minimum changes while satisfying Redux's requirements and making it compilable at the same time.
+In this blog, I will introduce you to the concept of Redux architecture briefly, implement and explain it in Swift bit by bit with minimum changes each time, while satisfying Redux's requirements and making it compilable at the same time.
 
 ## Redux 
 
@@ -14,10 +14,10 @@ In this blog, I will introduce you to the concept of Redux architecture, impleme
 
 In essense, it's an idea which trys to
 
-- seperate/isolate where changes can happen to the "State" of an app/program
+- seperate/isolate where changes can happen to the "State" of an application
 - limits the flow of the data in an application
 
-### What composes Redux?
+### What Composes Redux?
 
 Five types (of things) composes Redux:
 
@@ -27,7 +27,7 @@ Five types (of things) composes Redux:
 - *Reducer*, which combines the current *State* and the dispatched action and generates a new *State*
 - *Subscriber*, which listens to changes of the *State* in a *Store*
 
-### Why go with Redux?
+### Why Go with Redux?
 
 > All data in an application follows the same lifecycle pattern, making the logic of your app more predictable and easier to understand.
 
@@ -62,9 +62,14 @@ A *Store* holds a *State* which could be anything, thus the simplest implementat
 
 ```swift
 class Store<State> {
-    var state: State! // This `!` will be explained
+    private(set) var state: State! // This `!` will be explained later
 }
 ```
+
+The *State* in a *Store* should be read-only and
+> The only way to change the state is to emit an action, an object describing what happened.
+
+[Redux Doc: Three Principles](http://redux.js.org/docs/introduction/ThreePrinciples.html)
 
 ### Reducer and Action
 
@@ -75,6 +80,7 @@ A *Store* need a *Reducer* to generate new *State*s from the current *State* and
     - takes a *State* and a *Action* and
     - returns a new *State*
 - An *Action* is only needed to differentiate from each other
+    - An *Action* can be just an empty Struct or an Enum as demonstrated in later sections
 
 Essentially, *Reducer* in Swift can be defined as a type.
 
@@ -93,11 +99,12 @@ class Store<State> {
 }
 ```
 
-#### Things to Note about Reducer Type
+#### Things to Note about Reducers
 
-- It takes `nil` as `State` which implies the default initial state is defined in a *Reducer* rather than *Store*
-    - This is partially why we need that `!` when defining the `state` in the `Store`
-- It should return the current *State* if it is given an *Action* it cannot handle
+- They should be pure: No side-effects. No API calls. etc.
+- They take `nil` as `State` which implies the default initial state is defined in a *Reducer* rather than a *Store*.
+    - This is partially why we need that `!` when defining the `state` in the `Store`.
+- They should return the current *State* if they are given an *Action* they cannot handle.
 
 ### Dispatching Actions and Notifying Subscribers
 
