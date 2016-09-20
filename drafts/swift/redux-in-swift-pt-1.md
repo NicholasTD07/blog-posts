@@ -86,7 +86,7 @@ A *Store* needs a *Reducer* to generate new *State*s from the current *State* an
 - A *Reducer*
     - takes a *State* and a *Action* and
     - returns a new *State*
-- An *Action* describes what happen**ed** while it may carry some data, e.g. `AddTodo(text: "buy milk")`
+- An *Action* describes what happen**ed** while it may carry some data, e.g. `AddTodo(text: "buy milk")` or `ToggleTodo(index: 1)`
     - An *Action* can be just an empty Struct or an Enum as demonstrated in later sections
 
 Essentially, a *Reducer* in Swift can be defined as a function type.
