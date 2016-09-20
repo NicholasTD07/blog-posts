@@ -12,16 +12,16 @@ In this blog, I will introduce you to the concept of Redux architecture briefly,
 
 ### WAT?
 
-In essense, it's an idea which trys to
+In essence, it's an idea which tries to
 
-- seperate/isolate where changes can happen to the "State" of an application
+- seperate/isolate the 'state' of an application to a single location
 - limits the flow of the data in an application
 
-### What Composes Redux?
+### What is Redux?
 
-Five types (of things) composes Redux:
+Redux is composed of five types (of things):
 
-- *State*, which could be anything
+- *State*, the entire internal state of an application, which could be anything
 - *Store*, which holds a *State*
 - *Action*, which gets dispatched to change the *State* in a *Store*
 - *Reducer*, which combines the current *State* and the dispatched action and generates a new *State*
@@ -80,13 +80,13 @@ The `state` is marked as `private(set)` because:
 
 ### Reducer and Action
 
-A *Store* need a *Reducer* to generate new *State*s from the current *State* and an Action, which means:
+A *Store* needs a *Reducer* to generate new *State*s from the current *State* and an Action, which means:
 
-- A *Store* need to hold onto a *Reducer*
+- A *Store* needs to hold onto a *Reducer*
 - A *Reducer*
     - takes a *State* and a *Action* and
     - returns a new *State*
-- An *Action* describes what happen**ed** which needs to differentiate from each other while it may carry some data
+- An *Action* describes what happen**ed** while it may carry some data, e.g. `AddTodo(text: "buy milk")`
     - An *Action* can be just an empty Struct or an Enum as demonstrated in later sections
 
 Essentially, a *Reducer* in Swift can be defined as a function type.
@@ -109,8 +109,12 @@ class Store<State> {
 #### Things to Note about Reducers
 
 - They should be pure: No side-effects. No API calls. etc.
-- They take `nil` as `State` which implies the default initial state is defined in a *Reducer* rather than a *Store*.
-    - This is partially why we need that `!` when defining the `state` in the `Store`.
+- They can take an Optional `State` which implies
+    - the *State* in a *Store* can be nil at the very beginning before
+      anything's dispatched (Don't worry. Next section will explain dispatching
+      *Action*s)
+    - the default initial state is defined in a *Reducer* rather than a *Store*.
+    - This is also partially why we need that `!` when defining the `state` in the `Store`.
 - They should return the current *State* if they are given an *Action* they cannot handle.
 
 ### Dispatching Actions and Notifying Subscribers
@@ -119,8 +123,8 @@ An *Action* can be dispatched to a *Store* to change its *State*. After a *Store
 
 - A *Subscriber* is a function takes a *Store*
 - *Subscribers* can subscribe to a *Store* (will be explained in the next section)
-- A *Store* need to hold onto an array of *Subscribers*
-- After a *Store*'s *State* changes, the *Store* need to notify the change to all of its *Subscribers*
+- A *Store* needs to hold onto an array of *Subscribers*
+- After a *Store*'s *State* changes, the *Store* needs to notify the change to all of its *Subscribers*
 
 ```swift
 class Store<State> {
@@ -137,7 +141,7 @@ class Store<State> {
 }
 ```
 
-Now the generic class `Store` is almost usable except a few pieces missing. Example usage:
+Now the generic class `Store` is almost usable except a few missing pieces. Example usage:
 
 ```swift
 struct Increase: ActionType { }
@@ -147,9 +151,9 @@ let counterStore = Store<Int>.init { (state: Int?, action: ActionType) -> Int in
 counterStore.dispatch(Increase())
 ```
 
-If you want to run above snippet with minimum change, replace the `/* ... */` with `return 0`.
+If you want to run the snippet above at this point, you will need to replace the `/* ... */` with `return 0`.
 
-#### How does a Store Get its Initial State?
+#### How does a Store get its initial State?
 
 We need to update the `init` method in `Store` to the following:
 
@@ -179,11 +183,11 @@ So when a *Store* initializes, the following would happen regarding its `state`:
 
 #### The BANG`!`
 
-As you can see from the above and actually running the snippet, the forced unwrapped `state` in the `Store` will always be set to non nil values before it's used as a non nil value. It is not only safe but also convenient to use (no need for `guard let`s everywhere).
+As you can see from the above and actually running the snippet, the force-unwrapped `state` in the `Store` will always be set to non-nil values before it's used as a non nil value. It is not only safe but also convenient to use (no need for `guard let`s everywhere).
 
 ### Subscribing to a Store
 
-*Subscriber*s are functions which takes a *Store* as its only param and they can subscribe to *Store*s by calling the following method. When it's subscribed to a *Store*, it should get the *Store*'s current *State*.
+*Subscriber*s are functions which takes a *Store* as their only param. They can subscribe to *Store*s by calling the `subscribe` method as illustrated below. When a *Subscriber* is subscribed to a *Store*, it will receive the *Store*'s current *State*.
 
 ```swift
 class Store<State> {
@@ -206,13 +210,13 @@ counterStore.subscribe { (store: Store<Int>) in
 
 #### TESTS!
 
-If you remove all the example snippet and add the following snippet and run the file either
+If you remove all the example snippets, add the following and run the file in either:
 
-- in Xcode Playground or,
-- in commond line by running `swift path/to/your-file` or,
-- in Vim by doing `:w | !swift %` (personal perference)
+- Xcode Playground or,
+- command line by running `swift path/to/your-file` or,
+- Vim by doing `:w | !swift %` (personal preference)
 
-the file should run without any problem which indicates all the assert (tests) passes.
+the test suite should run without any problem which indicates all the assert (tests) passes.
 
 ```swift
 enum CounterActions: ActionType {
@@ -265,7 +269,7 @@ assert(counter == counterStore.state)
 
 In the next blog, I will
 
-- Build a Todo with Swift and the micro Redux framework we built in this blog post.
+- Build an iOS Todo app with Swift and the micro Redux framework we built in this blog post.
 - explain how to split large *Reducer*s into smaller ones and combine them back into one using something new called *`combineReducers`*.
     - (TBH: I have no idea what it would be right now. I guess it would be a function like the *Reducers* in this blog)
 
