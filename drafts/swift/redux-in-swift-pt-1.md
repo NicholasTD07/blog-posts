@@ -1,12 +1,12 @@
 # Redux in Swift Part 1: Introduction and Example within 70 lines!
 
-
-![](https://www.dropbox.com/s/51evjhxw35t59x2/Redux.png?raw=1)
-
+In this blog, I will introduce you to the concept of Redux architecture, implement and explain it in Swift bit by bit with minimum changes while satisfying Redux's requirements and making it compilable at the same time.
 
 ## Redux 
 
 > Redux architecture revolves around a **strict unidirectional data flow**.
+
+![](https://www.dropbox.com/s/51evjhxw35t59x2/Redux.png?raw=1)
 
 [Redux Doc: Data Flow](http://redux.js.org/docs/basics/DataFlow.html)
 
