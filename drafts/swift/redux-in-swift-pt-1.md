@@ -93,10 +93,6 @@ class Store<State> {
 }
 ```
 
-#### Why `ActionType` cannot be an `Enum`?
-
-Because `case`s cannot be added outside of `Enum` , otherwise, if you do `extend SomeEnum { case X }` you would get this compiler error: `enum 'case' is not allowed outside of an enum`.
-
 #### Things to Note about Reducer Type
 
 - It takes `nil` as `State` which implies the default initial state is defined in a *Reducer* rather than *Store*
@@ -199,19 +195,23 @@ If you remove all the example snipet and add the following snippet and run the f
 the file should run without any problem which indicates all the assert (tests) passes.
 
 ```swift
-struct Increase: ActionType { }
-struct Decrease: ActionType { }
+enum CounterActions: ActionType {
+    case Increase
+    case Decrease
+}
 
 let counterStore = Store<Int>.init { (state: Int?, action: ActionType) -> Int in
     let state = state ?? 0
 
-    switch action {
-    case _ as Increase:
-        return state + 1
-    case _ as Decrease:
-        return state - 1
-    default:
+    guard let counterAction = action as? CounterActions else {
         return state
+    }
+
+    switch counterAction {
+    case .Increase:
+        return state + 1
+    case .Decrease:
+        return state - 1
     }
 }
 
@@ -223,14 +223,13 @@ counterStore.dispatch(InitialAction())
 assert(counterStore.state == 0)
 
 // dispatch Increase will increase the state
-counterStore.dispatch(Increase())
+counterStore.dispatch(CounterActions.Increase)
 assert(counterStore.state == 1)
 
-// dispatch Decrease will decrease the state
-counterStore.dispatch(Decrease())
+// dispatch Decrease will increase the state
+counterStore.dispatch(CounterActions.Decrease)
 assert(counterStore.state == 0)
 
-// when subscribing, subscribers will get notified of the state
 var counter: Int = -1000
 counterStore.subscribe { (store: Store<Int>) in
     counter = store.state
@@ -238,7 +237,7 @@ counterStore.subscribe { (store: Store<Int>) in
 assert(counter == counterStore.state)
 
 // when state is updated, subscirbers will get notified of the new state
-counterStore.dispatch(Increase())
+counterStore.dispatch(CounterActions.Increase)
 assert(counter == counterStore.state)
 ```
 
