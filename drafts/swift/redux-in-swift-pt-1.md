@@ -1,4 +1,4 @@
-# Redux in Swift Part 1: Introduction and Example within 70 lines!
+# Redux in Swift Part 1: Introduction and Example within 70 Lines!
 
 In this blog, I will introduce you to the concept of Redux architecture, implement and explain it in Swift bit by bit with minimum changes while satisfying Redux's requirements and making it compilable at the same time.
 
