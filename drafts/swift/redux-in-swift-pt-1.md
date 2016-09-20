@@ -101,7 +101,12 @@ class Store<State> {
 
 ### Dispatching Actions and Notifying Subscribers
 
-An *Action* can be dispatched to a *Store* to change its *State*. After a *Store*'s *State* is changed, the *Store* should notify all of its *Subscribers*.
+An *Action* can be dispatched to a *Store* to change its *State*. After a *Store*'s *State* is changed, the *Store* should notify all of its *Subscribers*. Thus,
+
+- A *Subscriber* is a function takes a *Store*
+- *Subscribers* can subscribe to a *Store* (will be explained in the next section)
+- A *Store* need to hold onto an array of *Subscribers*
+- After a *Store*'s *State* changes, the *Store* need to notify the change to all of its *Subscribers*
 
 ```swift
 class Store<State> {
@@ -164,7 +169,7 @@ As you can see from the above and actually running the snippet, the forced unwra
 
 ### Subscribing to a Store
 
-*Subscriber*s are functions which takes a *Store* as its only param and they can subscribe to *Store*s by calling the following method.
+*Subscriber*s are functions which takes a *Store* as its only param and they can subscribe to *Store*s by calling the following method. When it's subscribed to a *Store*, it should get the *Store*'s current *State*.
 
 ```swift
 class Store<State> {
@@ -187,10 +192,11 @@ counterStore.subscribe { (store: Store<Int>) in
 
 #### TESTS!
 
-If you remove all the example snipet and add the following snippet and run the file either
+If you remove all the example snippet and add the following snippet and run the file either
 
 - in Xcode Playground or,
-- in commond line by running `swift path/to/your-file`,
+- in commond line by running `swift path/to/your-file` or,
+- in Vim by doing `:w | !swift %` (personal perference)
 
 the file should run without any problem which indicates all the assert (tests) passes.
 
@@ -241,7 +247,7 @@ counterStore.dispatch(CounterActions.Increase)
 assert(counter == counterStore.state)
 ```
 
-## Summary / Recap / Conclusion
+## Summary / Recap / Conclusion / What's Next?
 
 TODO!
 
