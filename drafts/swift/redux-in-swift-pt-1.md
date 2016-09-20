@@ -66,11 +66,15 @@ class Store<State> {
 }
 ```
 
-The `state` is marked as `private(set) var` because 
+The `state` is marked as a `var` because:
 
-- the *State* in a *Store* can be changed by dispatching *Actions* to a *Store*
+the *State* in a *Store* can be changed by dispatching *Actions* to a *Store*.
+
+
+The `state` is marked as `private(set)` because:
+
 - the *State* in a *Store* should be read-only and
-    > The only way to change the state is to emit an action, an object describing what happened.
+- "The only way to change the state is to emit an action, an object describing what happened."
 
 [Redux Doc: Three Principles](http://redux.js.org/docs/introduction/ThreePrinciples.html)
 
