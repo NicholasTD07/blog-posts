@@ -261,9 +261,14 @@ counterStore.dispatch(CounterActions.Increase)
 assert(counter == counterStore.state)
 ```
 
-## Summary / Recap / Conclusion / What's Next?
+## What's Next?
 
-TODO!
+In the next blog, I will
+
+- explain how to split large *Reducer*s into smaller ones and combine them back into one using something new called *`combineReducers`*.
+- Build a Todo with Swift and the micro Redux framework we built in this blog post.
+
+Stay tuned!
 
 ## Ref
 
