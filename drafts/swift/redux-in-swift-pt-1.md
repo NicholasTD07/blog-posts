@@ -42,7 +42,8 @@ Redux is composed of five types (of things):
 
 ## Redux in Swift
 
-I will write the minimium implementation of a Redux architecture bit by bit, to get the snippet to compile while satisfying the requirements, with detailed explanations.
+I will write the minimium implementation of a Redux architecture bit by bit, to get the snippet to compile while satisfying the requirements, with detailed explanations. You can run the snippets below in either Xcode or your favorite editor(s).
+
 
 ## 70 Lines EXAMPLE!
 
