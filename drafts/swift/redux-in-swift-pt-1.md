@@ -275,6 +275,7 @@ In the future blogs, I will
 - Update the snippet to Swift 3 syntax (current version is written with Swift 2.2) [the actual commit](https://github.com/NicholasTD07/TTTTT/commit/d826f7f61afbed13d4c6da301f63e886d40163a8)
 - Remove the BANG`!` Make the `state` in the `Store` not force-unwrapped, i.e. `var state: State`.
 - Create a helper function to remove the need for *Reducer*s to do the type casting
+- Handle possible strong reference cycle between `Store` and `Subscriber` because of `dispatch`
 - Show how to split large *Reducer*s into smaller ones and combine them back into one.
 - Build an iOS Todo app with Swift and the micro Redux framework we built in this blog post.
 
