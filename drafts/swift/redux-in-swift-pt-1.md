@@ -2,6 +2,8 @@
 
 In this blog, I will introduce you to the concept of Redux architecture briefly, implement and explain it in Swift bit by bit with minimum changes each time, while satisfying Redux's requirements and making it compilable at the same time.
 
+Although the snippet in this blog is written with Swift 2.2, I will update it to Swift 3 syntax in the next blog.
+
 ## Redux 
 
 > Redux architecture revolves around a **strict unidirectional data flow**.
@@ -267,11 +269,13 @@ assert(counter == counterStore.state)
 
 ## What's Next?
 
-In the next blog, I will
+In the future blogs, I will
 
+- Update the snippet to Swift 3 syntax (current version is written with Swift 2.2)
+- Make the `state` in the `Store` not force-unwrapped, i.e. `var state: State`. No more `!`.
+- Create a helper function to remove the need for *Reducer*s to do the type casting
+- Show how to split large *Reducer*s into smaller ones and combine them back into one.
 - Build an iOS Todo app with Swift and the micro Redux framework we built in this blog post.
-- explain how to split large *Reducer*s into smaller ones and combine them back into one using something new called *`combineReducers`*.
-    - (TBH: I have no idea what it would be right now. I guess it would be a function like the *Reducers* in this blog)
 
 Stay tuned!
 
