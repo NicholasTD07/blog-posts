@@ -15,9 +15,9 @@ You can check out the change and detailed reasons [here](https://github.com/Nich
 
 ### WAT?
 
-In essence, it's an idea which tries to
+In essence, it is an idea which tries to
 
-- seperate/isolate the 'state' of an application to a single location
+- separate/isolate the 'state' of an application to a single location
 - limits the flow of the data in an application
 
 ### What is Redux?
@@ -42,7 +42,7 @@ Redux is composed of five types (of things):
 
 ## Redux in Swift
 
-I will write the minimium implementation of a Redux architecture bit by bit, to get the snippet to compile while satisfying the requirements, with detailed explanations. You can run the snippets below in either Xcode or your favorite editor(s).
+I will write the minimum implementation of a Redux architecture bit by bit, to get the snippet to compile while satisfying the requirements, with detailed explanations. You can run the snippets below in either Xcode or your favorite editor(s).
 
 
 ## 70 Lines EXAMPLE!
@@ -115,10 +115,10 @@ class Store<State> {
 - They should be pure: No side-effects. No API calls. etc.
 - They can take an Optional `State` which implies
     - the *State* in a *Store* can be nil at the very beginning before
-      anything's dispatched (Don't worry. Next section will explain dispatching
+      anything is dispatched (Don't worry. Next section will explain dispatching
       *Action*s)
     - the default initial state is defined in a *Reducer* rather than a *Store*.
-    - This is also partially why we need that `!` when defining the `state` in the `Store`.
+    - The above is also partially why we need that `!` when defining the `state` in the `Store`.
 - They should return the current *State* if they are given an *Action* they cannot handle.
 
 ### Dispatching Actions and Notifying Subscribers
@@ -187,11 +187,11 @@ So when a *Store* initializes, the following would happen regarding its `state`:
 
 #### The BANG`!`
 
-As you can see from the above and actually running the snippet, the force-unwrapped `state` in the `Store` will always be set to non-nil values before it's used as a non nil value. It is not only safe but also convenient to use (no need for `guard let`s everywhere).
+As you can see from the above and running the snippet, the force-unwrapped `state` in the `Store` is always set to non-nil values before it is used as a non-nil value. It is not only safe but also convenient to use (no need for `guard let`s everywhere).
 
 ### Subscribing to a Store
 
-*Subscriber*s are functions which takes a *Store* as their only param. They can subscribe to *Store*s by calling the `subscribe` method as illustrated below. When a *Subscriber* is subscribed to a *Store*, it will receive the *Store*'s current *State*.
+*Subscriber*s are functions which take a *Store* as their only param. They can subscribe to *Store*s by calling the `subscribe` method as illustrated below. When a *Subscriber* subscribes to a *Store*, it receives the *Store*'s current *State*.
 
 ```swift
 class Store<State> {
@@ -282,11 +282,11 @@ In the future blogs, I will
 
 Stay tuned!
 
-Also, let me know if you think the current implementation can be improved in anyway.
+Also, let me know if you think the current implementation can be improved in any way.
 
 ## Credits
 
-I want to thank [Karl Bowden (on GitHub)](https://github.com/agentk) and also [Sam Warner](https://github.com/sam-w) for helping me reviewing this blog. [Karl Bowden (on GitHub)](https://github.com/agentk) also gave me the inspiration to write my own version of Redux.
+I want to thank [Karl Bowden (on GitHub)](https://github.com/agentk) and also [Sam Warner](https://github.com/sam-w) for helping me reviewing this blog. [Karl Bowden (on GitHub)](https://github.com/agentk) also gave me the inspiration to write my version of Redux.
 
 ## Ref
 
