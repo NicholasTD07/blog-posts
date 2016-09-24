@@ -284,8 +284,14 @@ Stay tuned!
 
 Also, let me know if you think the current implementation can be improved in anyway.
 
+## Credits
+
+I want to thank [Karl Bowden (on GitHub)](https://github.com/agentk) and also [Sam Warner](https://github.com/sam-w) for helping me reviewing this blog. [Karl Bowden (on GitHub)](https://github.com/agentk) also gave me the inspiration to write my own version of Redux.
+
 ## Ref
 
 [Getting Started with Redux (30 free videos, 2 minutes each)](https://egghead.io/series/getting-started-with-redux)
 
 [Introduction to Redux (JS)](http://redux.js.org)
+
+[ReSwift: Popular Redux written in Swift](https://github.com/ReSwift/ReSwift)
