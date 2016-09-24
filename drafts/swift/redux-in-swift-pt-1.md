@@ -279,6 +279,7 @@ In the future blogs, I will
 - Handle possible strong reference cycle between `Store` and `Subscriber` because of `dispatch`
 - Show how to split large *Reducer*s into smaller ones and combine them back into one.
 - Build an iOS Todo app with Swift and the micro Redux framework we built in this blog post.
+- [Minor Issue] Actions should be described in past tense, i.e. `Increased`, `AddedToDo`, `CompletedToDo`.
 
 Stay tuned!
 
