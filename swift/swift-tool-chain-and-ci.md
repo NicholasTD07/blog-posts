@@ -1,6 +1,8 @@
 # [WIP] Swift as Tool Chain and CI
 
-## Commands
+**Xcode 8 and Swift 3**
+
+## Commonly Used Commands
 
 ```sh
 # Create
