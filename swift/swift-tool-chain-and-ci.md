@@ -1,21 +1,41 @@
 # [WIP] Swift as Tool Chain and CI
 
-**Xcode 8 and Swift 3**
+**Xcode 8 and Swift 3 is soooo coool!**
+
+You can use `swift` (swift compiler) to
+
+- Create a package
+- Build and test
+- Generate xcode project file
+- Run tests with code coverage reports (kind of)
 
 ## Commonly Used Commands
+
+
+### Create a Package with Swift Package Manager
 
 ```sh
 # Create
 > mkdir /path/to/project
 > cd /path/to/project
 > swift package init --type library
+```
 
+### Build and Test with `swift`
+
+```sh
 # Build
 > swift build
 
 # Test
 > swift test
+```
 
+### Test with Code Coverage Enabled
+
+Workaround for `swift` and codecov do not work together as of now.
+
+```sh
 # Generate Xcode project with code coverage enabled
 > swift package generate-xcodeproj --enable-code-coverage
 
@@ -25,7 +45,6 @@
 
 ## Example CI Configuration
 
-`swift test` and CodeCov do not work very well as of now.
 
 ```yml
 language: objective-c
