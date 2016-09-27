@@ -1,4 +1,4 @@
-# [WIP] Swift as Tool Chain and CI
+# Swift as Tool Chain and CI
 
 **Xcode 8 and Swift 3 is soooo coool!**
 
