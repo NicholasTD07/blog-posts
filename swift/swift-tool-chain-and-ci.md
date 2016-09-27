@@ -61,3 +61,13 @@ after_success:
 ```
 
 https://github.com/NicholasTD07/ExpenseKit/blob/master/.travis.yml
+
+## Example Project
+
+I put this ExpenseKit together in one night with the help of swift compiler, `swift`. Although ExpenseKit's functionality is very basic and limited, it's very easy to set up a project with Swift Package Manager and get it building and testing with code coverage report on CI. Good user experience in general :)
+
+[ExpenseKit: Protocol Oriented Expanse and Budget Managing Kit in Swift 3](https://github.com/NicholasTD07/ExpenseKit)
+
+### Caveats 
+
+- The generated project only contains a macOS target as of now...
