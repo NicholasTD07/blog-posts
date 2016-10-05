@@ -49,3 +49,12 @@ Drafts are in other branches (`not master`)
 ## Random Idea Collector
 
 - Maybe a `bits` subdomain for <language> bits sections?
+
+## Workflow
+
+* New drafts in its own branches `draft/topic/this-is-a-test`!
+* Write and iterate!
+* Done!
+* Create a PR!
+* Merge!
+* Launch! 🚀 (JK)
