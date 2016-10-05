@@ -5,9 +5,8 @@ Nothing's here yet.
 
 ## Posts
 
-WIP | TBD
-
-> TBD: To Be Developed 😝
+### [Swift](./swift/)
+  - [Redux in Swift Part 1: Introduction and Example within 70 Lines!](./swift/redux-in-swift-pt-1.md)
 
 ## Where are the Drafts?
 
