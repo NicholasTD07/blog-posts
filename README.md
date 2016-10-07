@@ -1,7 +1,8 @@
 # Blog Posts by Nicholas Tian
 
-Nothing's here yet.
+All tech blogs are here.
 
+Swift, Git, Python, etc. you name it.
 
 ## Posts
 
