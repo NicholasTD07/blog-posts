@@ -4,17 +4,18 @@
 
 - love playing minecraft
 - would like to have periodic world backups (hourly, daily, weekly, monthly, yearly)
-- have a world (roughly a month old), got 62 backups (full copy of the save), already at 3.6G
+- have a world (roughly a month old), got 62 backups (full copy of the world save), already at 3.6G
 - as you can see, plain copies takes a lot space
+- Guess/Assumption: A lot files are the same among different backups.
 - would like to save as much space as I can
-- ZFS got quite a few features that can help save time
+- ZFS got a few features that can help save space
 
 I want to find out which option gives me more free space
 
 ## Options
 
-1. No copy. Use ZFS Snapshots and compression
-2. Use copies. Use ZFS compression and dedup
+1. No copy. Use ZFS compression and **snapshots**
+2. Use copies. Use ZFS compression and **dedup**
 
 ## Advantages / Disadvantages
 
@@ -36,7 +37,6 @@ I want to find out which option gives me more free space
     - Copy the next backup to overwrite the previous backup
     - Repeat the last two steps
 4. See how much space dataset A and B use
-
 
 ## Experiment
 
@@ -141,9 +141,21 @@ zfs create test/snapshot
 zfs set compression=on test/snapshots
 ```
 
-### Using snapshots to store all the minecraft saves
+### Copying and snapshotting
 
-Only refering to 52M data in the file system.
+I created a little Python snippet to help me with this. Basically, it works like this
+
+1. Get a list of absolute paths of all the world saves (a save is a directory containing some files) in my backup directory
+2. Get the modified time from a file within the saves (since these directories themselves were moved around)
+3. Combining outputs of step 1 and 2 and form a list of tuple like this `(path, time)`
+4. Sort this list so the first tuple contains the path to the earliest save
+5. Iterate through the list of tuples and do a `cp` and `zfs snapshot` each time
+
+See the full snippet here: [script](https://github.com/NicholasTD07/demos/blob/master/vagrant/freebsd-12.0/scripts/t.py)
+
+### Stats when using snapshots to store all the minecraft saves
+
+As the following output shows, `test/snapshots` dataset only refers to 52M data in the file system. Because when the data is copied, it overwrites the previous one.
 
 ```
 $ zfs list
@@ -152,14 +164,14 @@ test            2.70G  16.6G    23K  /test
 test/snapshots  2.70G  16.6G  52.0M  /test/snapshots
 ```
 
-Double check with `du`
+Double check with `du`. `du` also reports only 52M is used.
 
 ```
 $ du -sh /test/snapshots/
  52M	/test/snapshots/
 ```
 
-However, it's using 2.7G physical space to store all the data. It's quite a lot, compared to when all the data was saved when both `dedup` and `compression` was turned on (780M).
+However, as shown in the following output, the dataset (the only dataset on this pool) is using 2.7G physical space to store all the data. It's quite a lot, compared to when all the data was saved on the `dedup` dataset when both `dedup` and `compression` was turned on (780M).
 
  ```
 $ zpool list
