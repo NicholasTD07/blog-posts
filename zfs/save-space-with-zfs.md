@@ -16,6 +16,12 @@ I want to find out which option gives me more free space
 1. No copy. Use ZFS Snapshots and compression
 2. Use copies. Use ZFS compression and dedup
 
+## Advantages / Disadvantages
+
+- Dedup needs to store a dedup/checksum table in memory. Large the data, larger the memory it needs. (320 bytes per block)
+- Dedup: No extra commands needed other than plain old `cp`
+- Snapshot: No memory requirement
+
 ## How to test which one is the best?
 
 1. Create a ZFS pool
@@ -128,7 +134,42 @@ NAME   SIZE  ALLOC   FREE  EXPANDSZ   FRAG    CAP  DEDUP  HEALTH  ALTROOT
 test  19.9G    86K  19.9G         -     0%     0%  1.00x  ONLINE  -
 ```
 
+### Creating and setting up `snapshot` dataset
+
+```sh
+zfs create test/snapshot
+zfs set compression=on test/snapshots
+```
+
+### Using snapshots to store all the minecraft saves
+
+Only refering to 52M data in the file system.
+
+```
+$ zfs list
+NAME             USED  AVAIL  REFER  MOUNTPOINT
+test            2.70G  16.6G    23K  /test
+test/snapshots  2.70G  16.6G  52.0M  /test/snapshots
+```
+
+Double check with `du`
+
+```
+$ du -sh /test/snapshots/
+ 52M	/test/snapshots/
+```
+
+However, it's using 2.7G physical space to store all the data. It's quite a lot, compared to when all the data was saved when both `dedup` and `compression` was turned on (780M).
+
+ ```
+$ zpool list
+NAME   SIZE  ALLOC   FREE  EXPANDSZ   FRAG    CAP  DEDUP  HEALTH  ALTROOT
+test  19.9G  2.70G  17.2G         -     0%    13%  1.00x  ONLINE  -
+ ```
+
 ### Establishing the control dataset
+
+After destorying and recreating zpool,
 
 1. Create another dataset `zfs create test/compressed`
 
