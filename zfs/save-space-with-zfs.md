@@ -14,8 +14,10 @@ I want to find out which option gives me more free space
 
 ## Options
 
-0. Copy the game save directory each time with `cp`. Use ZFS's compression and **dedup**
-0. Don't use copy `cp`. Use ZFS's compression and **snapshots**
+0. Copy the game save directory each time when backing up with `cp`. Use ZFS's compression and **dedup** features
+0. Don't use copy `cp`. Use ZFS's compression and **snapshots** features
+
+## Intro to ZFS's compression, **dedup** and **snapshots**
 
 ## Advantages / Disadvantages
 
