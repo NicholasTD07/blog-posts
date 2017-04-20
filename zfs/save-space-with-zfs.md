@@ -25,7 +25,7 @@ I want to find out which option gives me more free space
 - Dedup: No extra commands needed other than plain old `cp`
 - Snapshot: No memory requirement
 
-## How to test which one is the best?
+## Proposed: How to test which one is the best?
 
 1. Create a ZFS pool
 2. Create two datasets
@@ -39,6 +39,8 @@ I want to find out which option gives me more free space
     - Copy the next backup to overwrite the previous backup
     - Repeat the last two steps
 4. See how much space dataset A and B use
+
+This did not work out too well.
 
 ## Experiment
 
