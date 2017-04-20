@@ -39,7 +39,6 @@ I want to find out which option gives me more free space
 ```sh
 zpool create test /dev/ada1
 zfs create test/dedup
-zfs create test/snapshots
 ```
 
 (Note: Some `zpool` and `zfs` commands need root previllage, e.g. `create`, `set`, etc.)
@@ -49,8 +48,6 @@ zfs create test/snapshots
 ```sh
 zfs set dedup=on test/dedup
 zfs set compression=on test/dedup
-
-zfs set compression=on test/snapshots
 ```
 
 ### After copying to `/test/dedup`
@@ -62,8 +59,26 @@ $ zfs list
 NAME             USED  AVAIL  REFER  MOUNTPOINT
 test            2.70G  18.4G    23K  /test
 test/dedup      2.70G  18.4G  2.70G  /test/dedup
-test/snapshots    23K  18.4G    23K  /test/snapshots
 ```
+
+But looking at the output of `zpool list`, `dedup` is 3.58x while 3.7/2.7 is definitely not `3.58`... Hmmmm...
+
+```
+$ zpool list
+NAME   SIZE  ALLOC   FREE  EXPANDSZ   FRAG    CAP  DEDUP  HEALTH  ALTROOT
+test  19.9G   780M  19.1G         -     3%     3%  3.58x  ONLINE  -
+```
+
+Compression rate is at 1.4x.
+
+```
+$ zfs list -o name,compressratio
+NAME             RATIO
+test             1.40x
+test/dedup       1.40x
+```
+
+The following command "Simulate the effects of deduplication".
 
 ```
 $ zdb -S test
@@ -84,7 +99,34 @@ refcnt   blocks   LSIZE   PSIZE   DSIZE   blocks   LSIZE   PSIZE   DSIZE
 dedup = 3.58, compress = 1.41, copies = 1.00, dedup * compress / copies = 5.04
 ```
 
-Confused... In the theory, the pool right now only takes about `3.7/5.04 = ~750MB`
+If you look at the `dedup * compress / copies = 5.04` at the bottom right corner, it means that, in the theory, the pool right now only takes about `3.7/5.04 = ~750MB`. I am so confused... Why would `zfs list` says `test/dedup` is using 2.7G while `zpool list` tells us the pool is only using 780M?
+
+**AH HA!**
+
+If I looked closer, I would have found out that the header of the amount of data listed in the output of `zfs list` says *"Refer"* while the header in `zpool list` says *"Alloc"*...
+
+> ALLOC
+
+> The amount of physical space allocated to all datasets and internal metadata. Note that this amount differs from the amount of disk space as reported at the file system level.
+
+[Querying ZFS Storage Pool Status - Oracle](http://docs.oracle.com/cd/E19253-01/819-5461/6n7ht6r01/index.html)
+
+Obviously `zpool` and `zfs` have different understanding of how much space they use. `zpool` reports physical space allocated while `zfs`
+
+### Destorying and recreating zpool
+
+Since we only get actual space allocated from `zpool`, to make it easy to compare, we need to destroy and recreate the zpool.
+
+```sh
+zpool destroy test
+zpool create test /dev/ada1
+```
+
+```sh
+$ zpool list
+NAME   SIZE  ALLOC   FREE  EXPANDSZ   FRAG    CAP  DEDUP  HEALTH  ALTROOT
+test  19.9G    86K  19.9G         -     0%     0%  1.00x  ONLINE  -
+```
 
 ### Establishing the control dataset
 
@@ -94,7 +136,12 @@ Confused... In the theory, the pool right now only takes about `3.7/5.04 = ~750M
 
 3. Copy the data into it
 
+```sh
+$ zpool list
+NAME   SIZE  ALLOC   FREE  EXPANDSZ   FRAG    CAP  DEDUP  HEALTH  ALTROOT
+test  19.9G  2.70G  17.2G         -     0%    13%  1.00x  ONLINE  -
+```
 
-#### Something I don't understand
+##### Something I don't understand
 
 I noticed when I was copying all the data to the control dataset (with only `compression` turned on), there was high CPU usage but this did not happen when I was copying all the data to the dataset with both `compression` and `dedup` turned on.
