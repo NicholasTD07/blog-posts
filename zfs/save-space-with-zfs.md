@@ -14,8 +14,8 @@ I want to find out which option gives me more free space
 
 ## Options
 
-1. No copy. Use ZFS compression and **snapshots**
-2. Use copies. Use ZFS compression and **dedup**
+0. Copy the game save directory each time with `cp`. Use ZFS's compression and **dedup**
+0. Don't use copy `cp`. Use ZFS's compression and **snapshots**
 
 ## Advantages / Disadvantages
 
