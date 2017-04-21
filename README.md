@@ -4,6 +4,8 @@ All tech blogs are here.
 
 Swift, Git, Python, etc. you name it.
 
+You can also read my WIP drafts in [drafts](drafts/).
+
 ## Posts
 
 ### [Swift](swift/)
