@@ -25,7 +25,7 @@ I want to find out which option gives me more free space
 - Dedup: No extra commands needed other than plain old `cp`
 - Snapshot: No memory requirement
 
-## Proposed: How to test which one is the best?
+## Proposed Testing Method
 
 1. Create a ZFS pool
 2. Create two datasets
@@ -40,7 +40,7 @@ I want to find out which option gives me more free space
     - Repeat the last two steps
 4. See how much space dataset A and B use
 
-This did not work out too well.
+This did not work out too well. Continue reading to find out why.
 
 ## Experiment
 
@@ -88,7 +88,7 @@ test             1.40x
 test/dedup       1.40x
 ```
 
-The following command "Simulate the effects of deduplication".
+The following command is used to confirm the data we have is correct. What it does is "Simulate the effects of deduplication", even though the data is already deduplicated.
 
 ```
 $ zdb -S test
@@ -109,7 +109,7 @@ refcnt   blocks   LSIZE   PSIZE   DSIZE   blocks   LSIZE   PSIZE   DSIZE
 dedup = 3.58, compress = 1.41, copies = 1.00, dedup * compress / copies = 5.04
 ```
 
-If you look at the `dedup * compress / copies = 5.04` at the bottom right corner, it means that, in the theory, the pool right now only takes about `3.7/5.04 = ~750MB`. I am so confused... Why would `zfs list` says `test/dedup` is using 2.7G while `zpool list` tells us the pool is only using 780M?
+Looking at the `dedup * compress / copies = 5.04` at the bottom right corner, it means that, in the theory, the pool right now only takes about `3.7/5.04 = ~750MB`. I was so confused at this point... Why would `zfs list` says `test/dedup` is using 2.7G while `zpool list` tells us the pool is only using 780M?
 
 **AH HA!**
 
@@ -121,9 +121,11 @@ If I looked closer, I would have found out that the header of the amount of data
 
 [Querying ZFS Storage Pool Status - Oracle](http://docs.oracle.com/cd/E19253-01/819-5461/6n7ht6r01/index.html)
 
-Obviously `zpool` and `zfs` have different understanding of how much space they use. `zpool` reports physical space allocated while `zfs`
+Obviously `zpool` and `zfs` have different understanding of how much space they use. `zpool` reports physical space allocated while `zfs` only knows how much space the data uses in the file systems.
 
-### Destorying and recreating zpool
+This is also why the testing method needs to be changed to recreating the pool each time.
+
+### Destorying and recreating the pool
 
 Since we only get actual space allocated from `zpool`, to make it easy to compare, we need to destroy and recreate the zpool.
 
@@ -157,6 +159,8 @@ I created a little Python snippet to help me with this. Basically, it works like
 
 See the full snippet here: [script](https://github.com/NicholasTD07/demos/blob/master/vagrant/freebsd-12.0/scripts/t.py)
 
+
+
 ### Stats when using snapshots to store all the minecraft saves
 
 As the following output shows, `test/snapshots` dataset only refers to 52M data in the file system. Because when the data is copied, it overwrites the previous one.
@@ -175,7 +179,7 @@ $ du -sh /test/snapshots/
  52M	/test/snapshots/
 ```
 
-However, as shown in the following output, the dataset (the only dataset on this pool) is using 2.7G physical space to store all the data. It's quite a lot, compared to when all the data was saved on the `dedup` dataset when both `dedup` and `compression` was turned on (780M).
+However, as shown in the following output, the pool, also the dataset (since it's the only dataset in this pool) is using 2.7G physical space to store all the data. It's quite a lot, compared to when all the data was saved on the `dedup` dataset when both `dedup` and `compression` was turned on (780M).
 
  ```
 $ zpool list
@@ -199,6 +203,13 @@ NAME   SIZE  ALLOC   FREE  EXPANDSZ   FRAG    CAP  DEDUP  HEALTH  ALTROOT
 test  19.9G  2.70G  17.2G         -     0%    13%  1.00x  ONLINE  -
 ```
 
+When only `compression` is turned on, the data needs 2.7G physical space to be stored. It seems to me that, snapshotting does not provide any extra space-saving when compared to having data compressed.
+
 ##### Something I don't understand
 
 I noticed when I was copying all the data to the control dataset (with only `compression` turned on), there was high CPU usage but this did not happen when I was copying all the data to the dataset with both `compression` and `dedup` turned on.
+
+### I want to run more tests to validate ideas
+
+- What if we do not turn on `compression` for the snapshots? Would that make a difference?
+- Since `dedup` needs to store a table in the memory, what happens if we copy half the data and restart the machine and copy the other half? Do we get the same disk usage result?
