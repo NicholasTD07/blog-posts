@@ -1,8 +1,8 @@
-# Swift as Tool Chain and CI
+# Using Swift Package Manager
 
 **Xcode 8 and Swift 3 is soooo coool!**
 
-You can use `swift` (swift compiler) to
+You can use `swift` (the Swift compiler) to
 
 - Create a package
 - Build and test
