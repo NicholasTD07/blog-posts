@@ -1,6 +1,6 @@
 # Swifty Bits / Q&A
 
-All bits/snippets in this blog compiles with Swift 3 compiler.
+**All bits/snippets in this blog compiles with Swift 3 (v3.0.1) compiler.**
 
 ## Howto use Iterator?
 
