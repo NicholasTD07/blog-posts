@@ -6,8 +6,11 @@ Swift, Git, Python, etc. you name it.
 
 ## Posts
 
-### [Swift](./swift/)
-  - [Redux in Swift Part 1: Introduction and Example within 70 Lines!](./swift/redux-in-swift-pt-1.md)
+### [Swift](swift/)
+  - [Redux in Swift Part 1: Introduction and Example within 70 Lines!](swift/redux-in-swift-pt-1.md)
+
+### [Git](git/)
+  - [Git: Pull from local repositories](git/pull-from-local-repo.md)
 
 ## Workflow
 
