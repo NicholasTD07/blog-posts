@@ -2,7 +2,9 @@
 
 **Xcode 8 and Swift 3 is soooo coool!**
 
-You can use `swift` (the Swift compiler) to
+Because of the addition of the Swift Package Manager to the `swift`.
+
+You can use the Swift Package Manager to
 
 - Create a package
 - Build and test
@@ -18,7 +20,7 @@ You can use `swift` (the Swift compiler) to
 # Create
 > mkdir /path/to/project
 > cd /path/to/project
-> swift package init --type library
+> swift package init
 ```
 
 ### Build and Test with `swift`
