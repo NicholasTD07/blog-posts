@@ -9,8 +9,8 @@ You can also read my WIP drafts in [drafts](drafts/).
 ## Posts
 
 ### [Swift](swift/)
-  - [Redux in Swift Part 1: Introduction and Example within 70 Lines!](swift/redux-in-swift-pt-1.md)
   - [Using Swift Package Manager](https://github.com/NicholasTD07/blog-posts/blob/master/swift/using-swift-package-manager.md)
+  - [Redux in Swift Part 1: Introduction and Example within 70 Lines!](swift/redux-in-swift-pt-1.md)
   
 ### [Git](git/)
   - [Git: Pull from local repositories](git/pull-from-local-repo.md)
