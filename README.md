@@ -9,9 +9,11 @@ Swift, Git, Python, etc. you name it.
 ### [Swift](./swift/)
   - [Redux in Swift Part 1: Introduction and Example within 70 Lines!](./swift/redux-in-swift-pt-1.md)
 
-## Where are the Drafts?
+## Workflow
 
-Drafts are in other branches (`not master`)
+* New drafts in [drafts](./drafts)
+* Write and iterate!
+* Done? Move it out of [drafts](./drafts)
 
 ## To Write
 
@@ -50,12 +52,3 @@ Drafts are in other branches (`not master`)
 ## Random Idea Collector
 
 - Maybe a `bits` subdomain for <language> bits sections?
-
-## Workflow
-
-* New drafts in its own branches `draft/topic/this-is-a-test`!
-* Write and iterate!
-* Done!
-* Create a PR!
-* Merge!
-* Launch! 🚀 (JK)
